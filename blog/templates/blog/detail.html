@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <div>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </div>
+    <div>
+        <img src="{% static 'Europe.jpeg' %}" alt="Profile Image" class="img-fluid" width="850" height="200">
+    </div>
+    <article class="media content-section">
+        <img class="rounded-circle" src="{{ object.author.profile.image.url }}" alt="Image" width="50" height="50">
+        <div class="media-body>">
+            <div class="article-metadata">
+                <a class="mr-2"
+                   href="{% url 'user-posts' object.author.username %}"> {{ object.author }}</a>
+                <a class="mr-2" href="{% url 'country-posts' post.country_name %}">{{ post.country_name }}</a>
+                <small class="text-muted"> {{ object.date_posted|date:"F d, Y" }}</small>
+{#                <small class="text-muted">{{ post.country_name }}</small> <!-- Afișează țara -->#}
+                {% if object.author == user %}
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1"
+                           href="{% url 'update' object.id %}">Actualizează</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete' object.id %}">Șterge</a>
+                    </div>
+                {% endif %}
+            </div>
+            <h2 class="article-title fst-italic">{{ object.title }}</h2>
+            <p class="article-content break-after-period">{{ object.content }}</p>
+        </div>
+    </article>
+{% endblock %}

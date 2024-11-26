@@ -1,0 +1,86 @@
+{% load static %}
+{% include 'blog/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with Hotels</title>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #0071c2; /* Culoare specifică Booking */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005b99; /* Culoare la hover */
+        }
+    </style>
+</head>
+<body>
+<h1>Hotels Map</h1>
+<div id="map"></div>
+
+<!-- Google Maps JavaScript API -->
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap">
+</script>
+
+<script>
+    let map;
+
+    function initMap() {
+        // Inițializează harta centrată pe o locație implicită (Paris, ca exemplu)
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: {lat: 48.8566, lng: 2.3522},
+            zoom: 10,
+        });
+
+        // Încarcă locațiile de cazare din endpointul API
+        fetch('/api/accommodations/')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(location => {
+                    const marker = new google.maps.Marker({
+                        position: {lat: location.latitude, lng: location.longitude},
+                        map: map,
+                        title: `${location.name} - ${location.price_per_night} lei per night`,
+                    });
+
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<strong>${location.name}</strong><br>Address: ${location.address}<br>Price: ${location.price_per_night} lei`,
+                    });
+
+                    // Afișează popup-ul la click pe marcaj
+                    marker.addListener("click", () => {
+                        infoWindow.open(map, marker);
+                    });
+                });
+            })
+            .catch(error => console.error('Eroare la încărcarea locațiilor:', error));
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwzlv2ofxM6xwaUYv69t0VYCPTNc4h0EA&callback=initMap"></script>
+<button onclick="redirectToBooking()">Mergi pe Booking.com</button>
+
+<script>
+    function redirectToBooking() {
+        window.location.href = "https://www.booking.com/hotel/fr/paris.ro.html?aid=7313875;label=gen173nr-1BCAEoggI46AdIM1gEaPQBiAEBmAEHuAEXyAEM2AEB6AEBiAIBqAIDuAKEmqOZBsACAdICJGJlMmMzNjc1LWE2MTYtNDg5YS1iZjc4LTJlMTE1Yjk2MzgzYtgCBOACAQ;sid=7313875;dist=0&lang=ro"
+    }
+</script>
+
+</body>
+</html>

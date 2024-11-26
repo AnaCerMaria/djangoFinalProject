@@ -1,0 +1,51 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <div>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </div>
+    <div>
+        <img src="{% static 'Europe.jpeg' %}" alt="Profile Image" class="img-fluid" width="850" height="200">
+    </div>
+    {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle" src="{{ post.author.profile.image.url }}" alt="Image" width="50"
+                 height="50">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2"
+                       href="{% url 'user-posts' post.author.username %}"> {{ post.author }}</a>
+                    <a class="mr-2" href="{% url 'country-posts' post.country_name %}">{{ post.country_name }}</a>
+                    <small class="text-muted"> {{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title fst-italic" href="{% url 'detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content break-after-period">{{ post.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+    {% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">Prima pagină</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Pagina
+                anterioară</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Următoarea
+                pagină</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Ultima
+                pagină</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{#            src="https://www.booking.com/maps.embed?city=paris&aid=123456"  <!-- Înlocuiește 'aid=123456' cu ID-ul tău de afiliat, dacă ai unul -->#}

@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Conectează-te!</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Conectează-te!</button>
+                    <small class="text-muted ml-2">
+                        <a href="{% url 'password_reset'%}">Ți-ai uitat parola?</a>
+                    </small>
+                </div>
+            </form>
+    <div class="order-top pt-3">
+        <small class="text-muted">
+            Nu ai încă cont? <a class="ml-2" href="{% url 'register' %}">Înregistrează-te acum!</a>
+        </small>
+    </div>
+    </div>
+{% endblock content %}

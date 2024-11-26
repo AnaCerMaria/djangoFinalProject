@@ -1,0 +1,136 @@
+/* Stiluri pentru antet*/
+.site-header {
+    background-color: #5f788a;
+    color: #ADD8E6;
+    padding: 1rem;
+}
+
+.site-header .navbar-nav .nav-link {
+    color: #2d4059;
+    margin-left: 1rem;
+}
+
+.navbar-brand {
+    color: #2d4059;
+    margin-left: 1rem;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+    color: #ADD8E6;
+}
+.btn-outline-secondary{
+        float: left;
+}
+
+/* Stiluri pentru Sidebar */
+.content-section {
+    background-color: #ADD8E6;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+img {
+    border-radius: 15px; /* Rotunjește colțurile la 15px */
+}
+
+ul.list-group-item {
+    color: #2d4059;
+    border: none;
+}
+
+ul.list-group-item:hover {
+    background-color: #2d4059;
+}
+
+/* Stiluri pentru formulare și câmpuri de căutare */
+input[type="text"], input[type="password"], textarea {
+    border-radius: 5px;
+    border: 1px solid #2d4059;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+input[type="submit"] {
+    background-color: #2d4059;
+    color: #ADD8E6;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2d4059;
+}
+
+/* Meniul de navigare */
+.navbar {
+    background-color: #2d4059;
+    border-radius: 0;
+}
+
+.navbar a {
+    color: #ADD8E6;
+    padding: 15px 20px;
+}
+
+.navbar a:hover {
+    background-color: #2d4059;
+    color: #ADD8E6;
+}
+
+/*Link-uri*/
+p {
+    line-height: 1.6;
+}
+
+/* Animație pentru hover pe butoane și elemente */
+.btn, .list-group-item {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.list-group-item:hover {
+    color: #ADD8E6;
+    background-color: #2d4059;
+}
+
+/* Animație pentru titluri */
+h1, h2, h3:hover {
+    color: #2d4059;
+    transition: color 0.4s ease;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+
+/* Stil pentru div-ul care va conține harta */
+.map {
+    width: 100%;
+    height: 80vh; /* Înălțimea hărții poate fi ajustată */
+}
+
+/* Footer */
+footer {
+    background-color: #2d4059;
+    color: #ADD8E6;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #ADD8E6;
+}
+
+footer a:hover {
+    color: #ADD8E6;
+    text-decoration: none;
+}
